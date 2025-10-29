@@ -10,3 +10,137 @@ jobs:
   build:
     runs-on: ubuntu-latest
       container: python: 3.9-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+          - name: Lint with flake8
+            run: |
+              flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
+              flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
+
+
+          
+
+            
+
+Click here for the answer.
+Replace the workflow.yml file with the code snippet below. You can also copy relevant parts of the code. Be sure to indent properly:
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    16
+    17
+    18
+    19
+    20
+    21
+    22
+    23
+    24
+    25
+
+    name: CI workflow
+    on:
+      push:
+        branches: main
+      pull_request:
+        branches: main
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        container: python:3.9-slim
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+          
+          - name: Install dependencies
+            run: |
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+          
+          - name: Lint with flake8
+            run: |
+              flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
+              flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
+
+          - name: Run unit tests with nose
+            run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
+
+
+          
+
+            
+
+Click here for the answer.
+Replace the workflow.yml file with the code snippet below. You can also copy relevant parts of the code. Be sure to indent properly:
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    16
+    17
+    18
+    19
+    20
+    21
+    22
+    23
+    24
+    25
+    26
+    27
+    28
+
+    name: CI workflow
+    on:
+      push:
+        branches: [ "main" ]
+      pull_request:
+        branches: [ "main" ]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        container: python:3.9-slim
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+          - name: Install dependencies
+            run: |
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+          - name: Lint with flake8
+            run: |
+              flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
+              flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
+          - name: Run unit tests with nose
+            run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
